@@ -16,7 +16,7 @@ class App extends React.Component () {
     const filteredEmployees = this.state.employees.filter
     // this is returned as array of objects [{}]
 
-    // sort order
+    //use sort order
 
     this.setState({
       [name]: value
@@ -27,12 +27,17 @@ class App extends React.Component () {
 
   };
 
+  handleClick = event =>{
+    // sort order toggle
+  }
+
   render(){
     return (
     //header
     //searchbar name="search" handleInputChange= {this.handleInputChange} value={this.state.search}
     //table
     //   table head
+    // clickable sort icon
     //    icon, name, phone number, email, date of birth
     //       close table head
     //     this.state.employees.map(users =>(){
