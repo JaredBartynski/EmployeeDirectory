@@ -1,52 +1,64 @@
 import React from "react";
 import employees from "./employees.json";
+import Header from "./components/Header";
+import Search from "./components/Search";
+import TableRow from "./components/TableRow";
+import TableHead from "./components/TableHead";
 
-class App extends React.Component () {
+class App extends React.Component() {
   state = {
     employees: employees,
     search: "",
-    sortOrder: "ASC"
-  }
+    sortOrder: "ASC",
+  };
 
-  handleInputChange = event => {
-    const {name, value} = event.target;
+  handleInputChange = (event) => {
+    const { name, value } = event.target;
 
     //search will probably happen here
     // filter results here
-    const filteredEmployees = this.state.employees.filter
+    const filteredEmployees = this.state.employees.filter;
     // this is returned as array of objects [{}]
 
     //use sort order
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
-  handleFormSubmit = event =>{
+  handleFormSubmit = (event) => {};
 
-  };
-
-  handleClick = event =>{
+  handleClick = (event) => {
     // sort order toggle
-  }
-
-  render(){
-    return (
-    //header
-    //searchbar name="search" handleInputChange= {this.handleInputChange} value={this.state.search}
-    //table
-    //   table head
-    // clickable sort icon
-    //    icon, name, phone number, email, date of birth
-    //       close table head
-    //     this.state.employees.map(users =>(){
-    //   tablerow
-    //      image.png, john doe, 123,456,5432, email.com, dob
-    //        close table row
-    //       })
-   );
   };
+
+  render() {
+    return (
+      <>
+        <Header />
+        <Search inputChange={this.handleInputChange} />
+        <table className="container">
+          <TableHead onSort={this.handleSort} />
+          {this.state.employees
+            .filter((item) =>
+              item.name.toLowerCase().includes(this.state.search.toLowerCase())
+            )
+            .map((person) => (
+              <TableRow
+                id={person.id}
+                key={person.id}
+                name={person.name}
+                icon={person.image}
+                phoneNumber={person.phoneNumber}
+                email={person.email}
+                DoB={person.DoB}
+              />
+            ))}
+        </table>
+      </>
+    );
+  }
 }
 
 export default App;
